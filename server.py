@@ -5,7 +5,7 @@ import cv2 as cv
 import time
 import base64
 
-FPS = 300
+#FPS = 300
 
 cam_port = 0
 cam = cv.VideoCapture(cam_port) 
@@ -20,15 +20,11 @@ def get_jpg_as_b64():
     js = json.dumps({"type": "DISPLAY_MESSAGE", "data": {"image": jpg_as_text}})
     return js
 
-get_jpg_as_b64()
 async def send_msg(websocket):
     while(True):
         frame = get_jpg_as_b64()
         await websocket.send(frame)
-        await asyncio.sleep(1/FPS)
-
-        print(frame)
-        print("\n\n\n")
+        #await asyncio.sleep(1/FPS)
 
 async def echo(websocket):
     
